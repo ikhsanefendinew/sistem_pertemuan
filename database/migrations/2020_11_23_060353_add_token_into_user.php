@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSouvenirsTable extends Migration
+class AddTokenIntoUser extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,8 @@ class CreateSouvenirsTable extends Migration
      */
     public function up()
     {
-        Schema::create('souvenirs', function (Blueprint $table) {
-            $table->id();
-            $table->bigInteger('jumlah_pesanan');
-            $table->integer('id_pembayaran')->nullable();
-            $table->timestamps();
+        Schema::table('users', function (Blueprint $table) {
+            $table->string('api_token',100)->after('remember_token')->nullable()->unique();
         });
     }
 
@@ -28,6 +25,8 @@ class CreateSouvenirsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('souvenirs');
+        Schema::table('users', function (Blueprint $table) {
+            //
+        });
     }
 }

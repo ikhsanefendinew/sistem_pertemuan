@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateSouvenirsTable extends Migration
+class CreateKategorisTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,11 @@ class CreateSouvenirsTable extends Migration
      */
     public function up()
     {
-        Schema::create('souvenirs', function (Blueprint $table) {
+        Schema::create('kategoris', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('jumlah_pesanan');
-            $table->integer('id_pembayaran')->nullable();
+            $table->string('nama',255);
+            $table->bigInteger('harga');
+            $table->text('keterangan_produk');
             $table->timestamps();
         });
     }
@@ -28,6 +29,6 @@ class CreateSouvenirsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('souvenirs');
+        Schema::dropIfExists('kategoris');
     }
 }
