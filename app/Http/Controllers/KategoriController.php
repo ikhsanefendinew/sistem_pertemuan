@@ -17,6 +17,60 @@ class KategoriController extends Controller
         //
     }
 
+    public function getKategori(){
+        return Kategori::all();
+    }
+    
+    public function addKategori(Request $request){
+        $kategori= new Kategori();
+        $kategori->nama=$request->input('nama');
+        $kategori->harga=$request->input('harga');
+        $kategori->keterangan_produk=$request->input('keterangan');
+        $simpan=$kategori->save();
+
+        if($simpan!=null){
+            $message="Data berhasil disimpan";
+        }else{
+            $message="Data sudah disimpan";
+        }
+        return $message;
+
+    }
+    
+    public function updateKategori(Request $request,$id){
+        $nama=$request->input('nama');
+        $harga=$request->input('harga');
+        $keterangan=$request->input('keterangan');
+        
+        $kategori=Kategori::find($id);
+        
+        if($nama!=null){
+            $kategori->nama=$nama;
+        }
+        if($harga!=null){
+            $kategori->harga=$harga;
+        }
+        if($keterangan!=null){
+            $kategori->keterangan_produk=$keterangan;
+        }
+        $update=$kategori->save();
+        if($update!=null){
+            $message="Data berhasil diubah";
+        }else{
+            $message="Gagal update data";
+        }
+        return $message;
+    }
+    
+    public function deleteKategori(Request $request,$id){
+        $delete=Kategori::find($id)->delete();
+        if($delete!=null){
+            $message="Data berhasil dihapus";
+        }else{
+            $message="Data gagal dihapus";
+        }
+        return $message;
+    }
     /**
      * Show the form for creating a new resource.
      *

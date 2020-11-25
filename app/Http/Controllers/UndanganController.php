@@ -4,19 +4,71 @@ namespace App\Http\Controllers;
 
 use App\Models\Undangan;
 use Illuminate\Http\Request;
+use Illuminate\Database\QueryException;
 
 class UndanganController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+
+    public function getUndangan(){
+        return Undangan::all();
     }
 
+    public function addUndangan(Request $request){
+        $undangan=new Undangan();
+        $undangan->nama= $request->input('nama');
+        $undangan->waktu= $request->input('waktu');
+        $undangan->kode_barcode= $request->input('kode_barcode');
+        $undangan->id_desain= $request->input('id_desain');
+        $hasil = $undangan->save();
+
+        if($hasil!=null){
+            $message="berhasil disimpan";
+        }else{
+            $message="tidak disimpan";
+        }
+        return $message;
+    }
+
+    public function updateUndangan(Request $request,$id){
+        $undangan=Undangan::find($id);
+        
+        $nama= $request->input('nama');
+        $waktu= $request->input('waktu');
+        $kode_barcode= $request->input('kode_barcode');
+        $id_desain= $request->input('id_desain');
+
+        if($nama!=null){
+            $undangan->nama= $request->input('nama');
+        }
+        if($waktu!=null){
+            $undangan->waktu= $request->input('waktu');
+        }
+        if($kode_barcode!=null){
+            $undangan->kode_barcode= $request->input('kode_barcode');
+        }
+        if($id_desain!=null){
+            $undangan->id_desain= $request->input('id_desain');
+        }
+        $hasil = $undangan->save();
+        
+        if($hasil!=null){
+            $message="berhasil diupdate";
+        }else{
+            $message="tidak diupdate";
+        }
+        return $message;
+    }
+
+    public function deleteUndangan(Request $request,$id){
+        $undangan=Undangan::find($id);
+        if($undangan!=null){
+            $undangan->delete();
+            $message="Berhasil dihapus";
+        }else{
+            $message="data tidak diketahui";
+        }
+        return $message;
+    }
     /**
      * Show the form for creating a new resource.
      *

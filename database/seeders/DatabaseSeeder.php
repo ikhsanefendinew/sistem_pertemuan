@@ -15,9 +15,19 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
         $this->call([
+            //seeder sudah dimigrate
+
             // UserSeeder::class,
-            UndanganDetailsSeeder::class,
-            KategoriDetailsSeeder::class,
+            // KategoriSeeder::class,
+            // SouvenirSeeder::class,
+            // KertasDesainSeeder::class,
+            // UndanganDetailsSeeder::class,
+            // UndanganSeeder::class,
+            AcaraSeeder::class,
+
+
+            //seeder belum dimigrate
+            // KategoriDetailsSeeder::class,
         ]);
     }
 }

@@ -18,8 +18,7 @@ class CreateUndangansTable extends Migration
             $table->string('nama',255);
             $table->datetime('waktu');
             $table->integer('kode_barcode')->nullable();
-            $table->integer('id_souvenir')->nullable();
-            $table->integer('id_desain')->nullable();
+            $table->unsignedBigInteger('id_desain');
             $table->timestamps();
         });
     }

@@ -16,7 +16,7 @@ class CreateUndanganDetailsTable extends Migration
         Schema::create('undangan_details', function (Blueprint $table) {
             $table->id();
             $table->string('nama',255);
-            $table->integer('id_kertas')->nullable();
+            $table->unsignedBigInteger('id_kertas');
             $table->timestamps();
         });
     }

@@ -15,8 +15,10 @@ class CreateSouvenirsTable extends Migration
     {
         Schema::create('souvenirs', function (Blueprint $table) {
             $table->id();
+            $table->string('nama',255);
             $table->bigInteger('jumlah_pesanan');
             $table->integer('id_pembayaran')->nullable();
+            $table->unsignedBigInteger('id_kategori');
             $table->timestamps();
         });
     }

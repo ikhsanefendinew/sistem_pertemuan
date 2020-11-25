@@ -17,6 +17,58 @@ class AcaraController extends Controller
         //
     }
 
+    public function getAcara(){
+        return Acara::all();
+    }
+    
+    public function addAcara(Request $request){
+        $waktu=date("Y:m:d H:i:s", strtotime($request->input('waktu')));
+
+        $acara=new Acara();
+        $acara->nama_teman=$request->input('nama');
+        $acara->alamat=$request->input('alamat');
+        $acara->jumlah=$request->input('jumlah');
+        $acara->waktu=$waktu;
+        $acara->save();
+        return "Berhasil Menambahkan";
+    }
+
+    public function updateAcara(Request $request, $id){
+        $waktu=date("Y:m:d H:i:s", strtotime($request->input('waktu')));
+        $acara=Acara::find($id);
+        $nama_teman=$request->input('nama');
+        $alamat=$request->input('alamat');
+        $jumlah=$request->input('jumlah');
+        // $waktu=$waktu;
+        if($nama_teman!=null){
+            $acara->nama_teman=$request->input('nama');
+        }
+        if($alamat!=null){
+            $acara->alamat=$request->input('alamat');
+        }
+        if($jumlah!=null){
+            $acara->jumlah=$request->input('jumlah');
+        }
+        // if($waktu!=null){
+        //     $acara->waktu=$waktu;
+        // }
+        $acara->save();
+        return "Berhasil diupdate";
+
+    }
+
+    public function deleteAcara(Request $request, $id){
+        $acara=Acara::find($id);
+        // return print_r($acara);
+        if($acara!=null){
+            $acara->delete();
+            $message="berhasil dihapus";
+        }else{
+            $message="Data tidak diketahui";
+        }
+        return $message;
+    }
+
     /**
      * Show the form for creating a new resource.
      *

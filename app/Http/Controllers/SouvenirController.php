@@ -7,14 +7,62 @@ use Illuminate\Http\Request;
 
 class SouvenirController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public function getSouvenir(){
+        return Souvenir::all();   
+    }
+    
+    public function addSouvenir(Request $request){
+        $souvenir= new Souvenir();   
+        $souvenir->nama=$request->input('nama');
+        $souvenir->jumlah_pesanan=$request->input('jumlah');
+        $souvenir->id_pembayaran=$request->input('id_p');
+        $souvenir->id_kategori=$request->input('id_k');
+        $tambah=$souvenir->save();
+        if($tambah!=null){
+            $message="Data berhasil disimpan";
+        }else{
+            $message="Data gagal disimpan";
+        }
+        return $message;   
+    }
+    
+    public function updateSouvenir(Request $request,$id){
+        $nama=$request->input('nama');
+        $jumlah=$request->input('jumlah');
+        $id_p=$request->input('id_p');
+        $id_k=$request->input('id_k');
+        
+        $souvenir=Souvenir::find($id);
+        if($nama!=null){
+            $souvenir->nama=$nama;
+        }
+        if($jumlah!=null){
+            $souvenir->nama=$nama;
+        }
+        if($id_p!=null){
+            $souvenir->nama=$nama;
+        }
+        if($id_k!=null){
+            $souvenir->nama=$nama;
+        }
+        $update=$souvenir->save();
+        if($update!=null){
+            $message="Data berhasil diubah";
+        }else{
+            $message="Data gagal diubah";
+        }
+        return $message;   
+    }
+    
+    public function deleteSouvenir(Request $request,$id){
+        $delete=Souvenir::find($id)->delete();
+        if($delete!=null){
+            $message="Data berhasil dihapus";
+        }else{
+            $message="Data gagal dihapus";
+        }
+        return $message;
+        return $message;   
     }
 
     /**
