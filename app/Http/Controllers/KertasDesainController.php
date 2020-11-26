@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\KertasDesain;
+use App\Models\KertasDesain as Kertas;
 use Illuminate\Http\Request;
 
 class KertasDesainController extends Controller
@@ -17,6 +17,48 @@ class KertasDesainController extends Controller
         //
     }
 
+    public function getKertas(){
+        return Kertas::all();
+    }
+    public function addKertas(Request $request){
+        $kertas = new Kertas();
+        $kertas->nama=$request->input('nama');
+        $kertas->harga=$request->input('harga');
+        $add= $kertas->save();
+        if ($add!=null) {
+            $message="Data berhasil ditambahkan";
+        }else{
+            $message="Data sudah ada";
+        }
+        return $message;
+    }
+    public function updateKertas(Request $request, $id){
+        $nama=$request->input('nama');
+        $harga=$request->input('harga');
+        $kertas=Kertas::find($id);
+        if($nama!=null){
+            $kertas->nama=$nama;
+        }
+        if($harga!=null){
+            $kertas->harga=$harga;
+        }
+        $update=$kertas->save();
+        if($update!=null){
+            $message="Data berhasil diupdate";
+        }else{
+            $message="Data gagal diupdate";
+        }
+        
+        return $message;
+    }
+    public function deleteKertas(Request $request, $id){
+        $delete=Kertas::find($id)->delete();
+        if($delete!=null){
+            $message="Data berhasil dihapus";
+        }else{
+            $message="Data gagal dihapus";
+        }return $message;
+    }
     /**
      * Show the form for creating a new resource.
      *

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\UndanganDetails;
+use App\Models\UndanganDetails as Details;
 use Illuminate\Http\Request;
 
 class UndanganDetailsController extends Controller
@@ -17,6 +17,52 @@ class UndanganDetailsController extends Controller
         //
     }
 
+    public function getUndanganDetails(){
+        return Details::all();
+    }
+    public function addUndanganDetails(Request $request){
+        $details= new Details();
+        $details->nama= $request->input('nama');
+        $details->id_kertas= $request->input('id_ker');
+        $add=$details->save();
+        if($add!=null){
+            $message="Data berhasil ditambahkan";
+        }else{
+            $message="Data sudah ada";
+        }
+        return $message;
+    }
+    public function updateUndanganDetails(Request $request,$id){
+        $nama= $request->input('nama');
+        $id_kertas= $request->input('id_ker');
+        
+        $details=Details::find($id);
+
+        if($nama!=null){
+            $details->nama=$nama;
+        }
+        if($id_kertas!=null){
+            $details->id_kertas=$id_kertas;
+        }
+
+        $update=$details->save();
+
+        if($update!=null){
+            $message="Data berhasil diupdate";
+        }else{
+            $message="Data gagal diupdate";
+        }
+        return $message;
+    }
+    public function deleteUndanganDetails(Request $request,$id){
+        $delete=Details::find($id)->delete();
+        if($delete!=null){
+            $message="Data berhasil dihapus";
+        }else{
+            $message="Data gagal dihapus";
+        }
+        return $message;
+    }
     /**
      * Show the form for creating a new resource.
      *

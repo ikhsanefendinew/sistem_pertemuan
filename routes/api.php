@@ -7,6 +7,8 @@ use App\Http\Controllers\AcaraController as Acara;
 use App\Http\Controllers\UndanganController as Undangan;
 use App\Http\Controllers\KategoriController as Kategori;
 use App\Http\Controllers\SouvenirController as Souvenir;
+use App\Http\Controllers\KertasDesainController as Kertas;
+use App\Http\Controllers\UndanganDetailsController as UndanganDetails;
 
 /*
 |--------------------------------------------------------------------------
@@ -46,4 +48,18 @@ Route::middleware('auth:api')->get('/souvenir',[Souvenir::class,'getSouvenir']);
 Route::middleware('auth:api')->post('/tambah_souvenir',[Souvenir::class,'addSouvenir']);
 Route::middleware('auth:api')->put('/ubah_souvenir/{id}',[Souvenir::class,'updateSouvenir']);
 Route::middleware('auth:api')->delete('/hapus_souvenir/{id}',[Souvenir::class,'deleteSouvenir']);
+
+// Fitur Kertas
+Route::middleware('auth:api')->get('/kertas',[Kertas::class,'getKertas']);
+Route::middleware('auth:api')->post('/tambah_kertas',[Kertas::class,'addKertas']);
+Route::middleware('auth:api')->put('/ubah_kertas/{id}',[Kertas::class,'updateKertas']);
+Route::middleware('auth:api')->delete('/hapus_kertas/{id}',[Kertas::class,'deleteKertas']);
+
+// Fitur Kertas
+Route::middleware('auth:api')->get('/u_details',[UndanganDetails::class,'getUndanganDetails']);
+Route::middleware('auth:api')->post('/tambah_u_details',[UndanganDetails::class,'addUndanganDetails']);
+Route::middleware('auth:api')->put('/ubah_u_details/{id}',[UndanganDetails::class,'updateUndanganDetails']);
+Route::middleware('auth:api')->delete('/hapus_u_details/{id}',[UndanganDetails::class,'deleteUndanganDetails']);
+
+
 
